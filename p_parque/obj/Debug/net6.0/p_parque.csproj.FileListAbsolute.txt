@@ -1,0 +1,4 @@
+C:\Users\B09S103est\Documents\p_parque\obj\Debug\net6.0\p_parque.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\B09S103est\Documents\p_parque\obj\Debug\net6.0\p_parque.AssemblyInfoInputs.cache
+C:\Users\B09S103est\Documents\p_parque\obj\Debug\net6.0\p_parque.AssemblyInfo.cs
+C:\Users\B09S103est\Documents\p_parque\obj\Debug\net6.0\p_parque.csproj.CoreCompileInputs.cache
