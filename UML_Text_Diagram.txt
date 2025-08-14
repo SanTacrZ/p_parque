@@ -1,0 +1,186 @@
+================================================================================
+                    SISTEMA DE GESTIÓN DE PARQUE DE DIVERSIONES
+                              DIAGRAMA DE CLASES UML
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                PARQUE                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ - nombre: string                                                           │
+│ - l_atraciones: List<Atraccion>                                            │
+│ - l_taquillas: List<Taquilla>                                              │
+│ - l_registros: List<Registro>                                              │
+│ - l_manillas: List<Manilla>                                                │
+│                                                                             │
+│ + vlr_entada: uint = 4000                                                  │
+│ + vlr_min_carga: uint = 20000                                              │
+│ + vlr_punto: uint = 500                                                    │
+│ + cant_manillas_entregadas_en_la_taquilla: ushort = 100                    │
+│ + cant_manillas_parque: ushort = 1000                                      │
+│ - cant_atracciones: byte = 10                                              │
+│ - cant_taquillas: byte = 3                                                 │
+│ + min_min_atra: TimeSpan = 0:01:00                                         │
+│ + max_min_atra: TimeSpan = 0:05:00                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Nombre: string {get; set}                                                │
+│ + L_atraciones: List<Atraccion> {get; set}                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Parque(nombre: string, l_atraciones: List<Atraccion>)                   │
+│ - Generar_Manillas(): List<Manilla>                                        │
+│ - Crear_taquilla(id: byte): Taquilla                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ contiene
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              ATRACCIÓN                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ - nombre: string                                                           │
+│ - puntos: byte                                                             │
+│ - duracion: TimeSpan                                                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Nombre: string {get; set}                                                │
+│ + Puntos: byte {get; set}                                                  │
+│ + Duracion: TimeSpan {get; set}                                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Atraccion(nombre: string, puntos: byte, duracion: TimeSpan)              │
+│ + Descontar_puntos(manilla: Manilla, parque: Parque): bool                 │
+│ + Descontar_puntos_S(manilla: Manilla): string                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ genera
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               REGISTRO                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ - atraccion: Atraccion                                                     │
+│ - manilla: Manilla                                                         │
+│ - hora_ingr: DateTime                                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Registro(atraccion: Atraccion, manilla: Manilla)                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                PARQUE                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ tiene
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               TAQUILLA                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ - id: byte                                                                 │
+│ - l_manillas: List<Manilla>                                                │
+│ - saldo_ventas: ulong                                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Id: byte {get; set}                                                      │
+│ + L_manillas: List<Manilla> {get; set}                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Taquilla(id: byte, l_manillas: List<Manilla>)                            │
+│ + Vender_manillas(dinero: ulong): Manilla                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ vende
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               MANILLA                                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ - id: int                                                                  │
+│ - saldo_puntos: ushort                                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Saldo_puntos: ushort {get; set}                                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Manilla()                                                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ usa
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               REGISTRO                                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                PARQUE                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ genera
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               MANILLA                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                PROGRAM                                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ + Main(args: string[]): void                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                        │
+                                        │ crea instancia
+                                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                PARQUE                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                              RELACIONES ENTRE CLASES
+================================================================================
+
+1. PARQUE → ATRACCIÓN (1:N)
+   - Un parque contiene múltiples atracciones
+   - Relación de composición
+
+2. PARQUE → TAQUILLA (1:N)
+   - Un parque tiene múltiples taquillas
+   - Relación de composición
+
+3. PARQUE → REGISTRO (1:N)
+   - Un parque mantiene múltiples registros
+   - Relación de composición
+
+4. PARQUE → MANILLA (1:N)
+   - Un parque genera múltiples manillas
+   - Relación de composición
+
+5. ATRACCIÓN → REGISTRO (1:N)
+   - Una atracción genera múltiples registros
+   - Relación de asociación
+
+6. MANILLA → REGISTRO (1:N)
+   - Una manilla puede generar múltiples registros
+   - Relación de asociación
+
+7. TAQUILLA → MANILLA (1:N)
+   - Una taquilla vende múltiples manillas
+   - Relación de asociación
+
+8. PROGRAM → PARQUE (1:1)
+   - El programa principal crea una instancia del parque
+   - Relación de dependencia
+
+================================================================================
+                              FLUJO DE OPERACIONES
+================================================================================
+
+1. INICIALIZACIÓN:
+   Program → Parque → Generar 1000 manillas
+   Parque → Crear 3 taquillas con 100 manillas cada una
+
+2. VENTA DE MANILLA:
+   Visitante → Taquilla → Validar dinero
+   Taquilla → Manilla → Asignar puntos
+   Taquilla → Visitante → Entregar manilla
+
+3. USO DE ATRACCIÓN:
+   Visitante → Atracción → Verificar saldo
+   Atracción → Manilla → Descontar puntos
+   Atracción → Registro → Crear registro
+   Atracción → Parque → Agregar registro
+
+4. CONSULTA DE SALDO:
+   Visitante → Manilla → Obtener saldo
+
+5. RECARGA DE PUNTOS:
+   Visitante → Taquilla → Validar dinero
+   Taquilla → Manilla → Agregar puntos
+
+================================================================================
